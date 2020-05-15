@@ -16,8 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React and build with Jenkins
-          This should cause a build.
+          Learn React and build with Jenkins. 
         </a>
       </header>
     </div>

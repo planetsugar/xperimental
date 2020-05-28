@@ -16,13 +16,14 @@ def readReleaseInformationFile() {
 }
 
 node {
-    env.NODEJS_HOME = "${tool 'nodejs'}"
+    nodeHome = tool name:'node-14.2.0', type: 'node'
 	// on linux / mac
-	env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+	//env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 	// on windows
 	//env.PATH="${env.NODEJS_HOME};${env.PATH}"
 
-	sh 'npm install'
+    echo nodeHome
+	//sh 'npm install'
 }
 
 /*pipeline {

@@ -1,7 +1,5 @@
 def printOutGitBranch() {
-    steps {
-        echo $GIT_BRANCH
-    }
+    echo $GIT_BRANCH
 }
 pipeline {
     agent any

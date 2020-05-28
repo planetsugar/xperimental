@@ -17,10 +17,11 @@ def readReleaseInformationFile() {
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
-         stage('Install') { 
-            steps {
-                sh 'npm install' 
-            }
+         stage('Install') {            
+                sh 'npm install'             
+        }
+        stage('Build') {
+            sh 'npm build'
         }
   }
 }

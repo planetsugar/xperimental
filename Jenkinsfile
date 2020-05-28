@@ -4,28 +4,11 @@ class ReleaseFileInformation {
     String git_url;
 }
 
-BASE_DIR = '.'
-RELEASE_INFORMATION_FILE = 'ReleaseInformation.txt'
-
-def createReleaseInformationFile() {
-    echo 'Create the release information file'
-}
-
-def readReleaseInformationFile() {
-    echo 'Read the release information file'
-}
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
          stage('Create/Read Release Info') {
-            def releaseFileInfo = new File(BASE_DIR, RELEASE_INFORMATION_FILE);
-
-            if (!releaseFileInfo.exists()) {
-                createReleaseInformationFile()
-            } else {
-                readReleaseInformationFile() 
-            }
-
+            sh 'touch releaseInfo.txt'
          }
          stage('Install') {                            
                 sh 'npm install'             

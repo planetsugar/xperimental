@@ -1,6 +1,3 @@
-import java.io.File 
-
-
 class ReleaseFileInformation {
     String version
     String build_date 
@@ -14,6 +11,9 @@ GIT_URL = 'git@github.com:planetsugar/xperimental.git'
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
+        stage('Clean Workspace') {
+            cleanWs()
+        }
         stage('Checkout source') {
             checkout([$class: 'GitSCM', branches: [[name: BRANCH_TO_BUILD]], 
                 doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
@@ -25,44 +25,15 @@ node {
             } else {
                 echo 'file needs created'
             }
-            // sh 'touch releaseInfo.txt'
-         }
-         stage('Install') {                            
+        }
+        stage('Install') {                            
                 sh 'npm install'             
         }
         stage('Build') {
             sh 'npm run-script build'
         }
-        stage('Clean Workspace') {
-            cleanWs()
-        }
-  }
-}
-
-/*pipeline {
-    agent any
-    tools {nodejs "node"}
-    stages {
-        stage('Initialize') {
-
-            def releaseFileInfo = new File(BASE_DIR, RELEASE_INFORMATION_FILE);
-
-            if (!releaseFileInfo.exists()) {
-                createReleaseInformationFile();
-                return;
-            }
-
-            readReleaseInformationFile();
-        }
-        stage('Install') { 
-            steps {
-                sh 'npm install' 
-            }
-        }
-        stage('Build') { 
-            steps {
-                sh 'npm run-script build' 
-            }
+        stage('Test') {
+            sh 'npm run-script build'
         }
     }
-}*/
+}

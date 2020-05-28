@@ -11,9 +11,6 @@ RELEASE_INFORMATION_FILE = 'releaseInfo.txt';
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
-        stage('Clean Workspace') {
-            cleanWs()
-        }
         stage('Create/Read Release Info') {
             if (fileExists(RELEASE_INFORMATION_FILE)) {
                 echo 'file exists'
@@ -27,6 +24,9 @@ node {
         }
         stage('Build') {
             sh 'npm run-script build'
+        }
+        stage('Clean Workspace') {
+            cleanWs()
         }
   }
 }

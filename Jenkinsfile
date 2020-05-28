@@ -16,7 +16,7 @@ def readReleaseInformationFile() {
 }
 
 node {
-    env.NODEJS_HOME = "${tool 'Node 14.2.0'}"
+    env.NODEJS_HOME = "${tool 'nodejs'}"
 	// on linux / mac
 	env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
 	// on windows

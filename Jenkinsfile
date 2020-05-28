@@ -1,21 +1,9 @@
 node {
     stage('Install') {
-        try {
-            sh 'npm install'
-        }
-        catch (exc) {
-            echo 'Something failed, I should sound the klaxons!'
-            throw
-        }
+        sh 'npm install'
     }
      stage('Build') {
-        try {
-            sh 'npm run-script build'
-        }
-        catch (exc) {
-            echo 'Something failed, I should sound the klaxons!'
-            throw
-        }
+        sh 'npm run-script build'
     }
 }
 

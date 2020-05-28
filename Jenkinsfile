@@ -1,7 +1,17 @@
+def printOutGitBranch() {
+    steps {
+        echo $GIT_BRANCH
+    }
+}
 pipeline {
     agent any
     tools {nodejs "node"}
     stages {
+        stage('Prep') {
+            steps {
+                printOutGitBranch()
+            }
+        }
         stage('Install') { 
             steps {
                 sh 'npm install' 

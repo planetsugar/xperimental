@@ -19,10 +19,10 @@ pipeline {
     agent any
     tools {nodejs "node"}
     stages {
-        stage('Initialise Release Information') {
+        stage('Initialize') {
 
             def releaseFileInfo = new File(BASE_DIR, RELEASE_INFORMATION_FILE);
-            
+
             if (!releaseFileInfo.exists()) {
                 createReleaseInformationFile();
                 return;

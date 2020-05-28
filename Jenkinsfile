@@ -1,3 +1,9 @@
+class ReleaseFileInformation {
+    String version
+    String build_date 
+    String git_url;
+}
+
 pipeline {
     agent any
     tools {nodejs "node"}

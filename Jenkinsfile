@@ -33,7 +33,7 @@ node {
             sh 'npm run-script build'
         }
         stage('Test') {
-            sh 'npm run-script build'
+            sh 'npm run-script test'
         }
     }
 }

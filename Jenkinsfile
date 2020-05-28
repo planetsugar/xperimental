@@ -1,16 +1,22 @@
 import java.io.File 
 
+
 class ReleaseFileInformation {
     String version
     String build_date 
     String git_url;
 }
 
+RELEASE_INFORMATION_FILE = 'releaseInfo.txt';
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
          stage('Create/Read Release Info') {
-            def file = new File('releaseInfo.txt') 
+            if (fileExists(RELEASE_INFORMATION_FILE)) {
+                echo 'file exists'
+            } else {
+                echo 'file needs created'
+            }
             // sh 'touch releaseInfo.txt'
          }
          stage('Install') {                            

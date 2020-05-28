@@ -16,14 +16,9 @@ def readReleaseInformationFile() {
 }
 
 node {
-    nodeHome = tool name:'node-14.2.0', type: 'nodejs'
-	// on linux / mac
-	//env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-	// on windows
-	//env.PATH="${env.NODEJS_HOME};${env.PATH}"
-
-    echo nodeHome
-	//sh 'npm install'
+     withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
+    sh 'node -v'
+  }
 }
 
 /*pipeline {

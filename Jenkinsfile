@@ -1,3 +1,5 @@
+import java.io.File 
+
 class ReleaseFileInformation {
     String version
     String build_date 
@@ -8,7 +10,8 @@ class ReleaseFileInformation {
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
          stage('Create/Read Release Info') {
-            sh 'touch releaseInfo.txt'
+            def file = new File('releaseInfo.txt') 
+            // sh 'touch releaseInfo.txt'
          }
          stage('Install') {                            
                 sh 'npm install'             

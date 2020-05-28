@@ -7,14 +7,17 @@ class ReleaseFileInformation {
     String git_url;
 }
 
-RELEASE_INFORMATION_FILE = 'releaseInfo.txt';
+RELEASE_INFORMATION_FILE = 'releaseInfo.txt'
+BRANCH_TO_BUILD = '*/jenkins-sample'
+CREDENTIALS_TO_USE = '3f2b2440-f394-42a8-ab89-5f6fa02e086a'
+GIT_URL = 'git@github.com:planetsugar/xperimental.git'
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
         stage('Checkout source') {
-            checkout([$class: 'GitSCM', branches: [[name: '*/jenkins-sample']], 
+            checkout([$class: 'GitSCM', branches: [[name: BRANCH_TO_BUILD]], 
                 doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
-                userRemoteConfigs: [[credentialsId: '3f2b2440-f394-42a8-ab89-5f6fa02e086a', url: 'git@github.com:planetsugar/xperimental.git']]])
+                userRemoteConfigs: [[credentialsId: CREDENTIALS_TO_USE, url: GIT_URL]]])
         }
         stage('Create/Read Release Info') {
             if (fileExists(RELEASE_INFORMATION_FILE)) {

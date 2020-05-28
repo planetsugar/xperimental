@@ -17,8 +17,15 @@ def readReleaseInformationFile() {
 
 node {
      withEnv(["PATH+NODE=${tool name: 'nodejs', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
-         stage('Prep') {
-             createReleaseInformationFile()
+         stage('Create/Read Release Info') {
+            def releaseFileInfo = new File(BASE_DIR, RELEASE_INFORMATION_FILE);
+
+            if (!releaseFileInfo.exists()) {
+                createReleaseInformationFile()
+            } else {
+                readReleaseInformationFile() 
+            }
+
          }
          stage('Install') {                            
                 sh 'npm install'             
